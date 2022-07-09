@@ -4,6 +4,7 @@ import 'package:rotten_potatoes/utill/colorR.dart';
 import 'package:rotten_potatoes/view/screen/auth/signup_screen.dart';
 import 'package:rotten_potatoes/view/screen/profile/profile_screen.dart';
 
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -103,6 +104,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 usernameController.text);
                             futureUserProfile.then((value) {
                               if (value.username != null) {
+                                Services.setToken(userLogin.data);
+                                Services.setUserProfileP(value);
                                 Navigator.pushReplacementNamed(context, '/home',
                                     arguments: {
                                       'id': value.id,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rotten_potatoes/services.dart';
 import 'package:rotten_potatoes/utill/colorR.dart';
 import 'package:rotten_potatoes/utill/images.dart';
 import 'package:rotten_potatoes/view/screen/auth/signup_screen.dart';
@@ -26,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
               width: MediaQuery.of(context).size.width * 0.7,
             ),
             Text(
-              'Rotten Potatoes',
+              'Gamers Gram',
               style: TextStyle(
                   // fontStyle: FontStyl,
                   fontWeight: FontWeight.w900,
@@ -79,6 +80,36 @@ class _AuthScreenState extends State<AuthScreen> {
                         Size(MediaQuery.of(context).size.width * 0.6, 50),
                     primary: Colors.white,
                     onPrimary: ColorR.text,
+                  ),
+                ),
+                // login as guest
+                SizedBox(
+                  height: 20,
+                ),
+                TextButton(
+                  onPressed: () {
+                    // UserProfile
+                    UserProfile userProfile = UserProfile(
+                      id: 0,
+                      fullname: 'مهمان',
+                      email: 'guest@gmail.com',
+                      username: 'guest',
+                      sex: 'male',
+                      image: '',
+                    );
+                    Services.setUserProfileP(userProfile);
+                    Navigator.pushReplacementNamed(context, '/home2',
+                        arguments: {
+                          'id': userProfile.id,
+                          'username': userProfile.username,
+                          'email': userProfile.email,
+                          'fullname': userProfile.fullname,
+                          'sex': userProfile.sex
+                        });
+                  },
+                  child: Text(
+                    'ورود به عنوان مهمان',
+                    style: TextStyle(fontFamily: 'iransans'),
                   ),
                 ),
               ],

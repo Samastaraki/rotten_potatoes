@@ -1,26 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rotten_potatoes/home_screen.dart';
 import 'package:rotten_potatoes/services.dart';
 import 'package:rotten_potatoes/utill/colorR.dart';
 import 'package:rotten_potatoes/utill/images.dart';
-import 'package:rotten_potatoes/view/screen/auth/auth_screen.dart';
-import 'package:rotten_potatoes/view/screen/landing/landing_screen.dart';
-import 'package:rotten_potatoes/view/screen/post/postGame_screen.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
 
-import 'editProfile_screen.dart';
-
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class UserScreen extends StatefulWidget {
+  const UserScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<UserScreen> createState() => _UserScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  late Future<UserProfile> _userProfile = Services.getUserProfileP();
+class _UserScreenState extends State<UserScreen> {
+  // late Future<UserProfile> _userProfile = Services.getUserProfileP();
   // user review
   late Future<List<ReviewUser>> _userReviews;
   List<ReviewUser> _userReviewsList = [];
@@ -32,7 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     // get token Future Build
     return FutureBuilder<UserProfile>(
-      future: _userProfile,
+      future: Services.getUserProfile(arguments['username']),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           UserProfile _profile = snapshot.data!;
@@ -49,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Padding(
                         // left 20, right 20, top 20, bottom 0
                         padding:
-                            const EdgeInsets.only(left: 25, right: 25, top: 50),
+                            const EdgeInsets.only(left: 20, right: 20, top: 50),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -62,89 +54,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     radius: 50,
                                     backgroundImage: AssetImage(Images.profile),
                                   ),
-                            //white edit profile button
-                            Expanded(child: Container()),
-                            Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(top: 15),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: ColorR.text, width: 2),
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
-                                  // width: 120,
-                                  height: 50,
-                                  child: FlatButton(
-                                    onPressed: () async {
-                                      await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EditProfileScreen()));
-                                      // set State
-                                      setState(() {
-                                        _userProfile =
-                                            Services.getUserProfileP();
-                                      });
-                                    },
-                                    child: Text('ویرایش پروفایل',
-                                        style: TextStyle(
-                                            fontFamily: 'iransans',
-                                            color: ColorR.text)),
-                                  ),
-                                ),
-                                // dark mode icon
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.brightness_2,
-                                        color: Colors.black,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          Get.changeThemeMode(ThemeMode.dark);
-                                        });
-                                      },
-                                    ),
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.brightness_2,
-                                        color: Colors.white,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          Get.changeThemeMode(ThemeMode.light);
-                                        });
-                                      },
-                                    ),
-                                    // logout button
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.exit_to_app,
-                                        color: Colors.black,
-                                      ),
-                                      onPressed: () async {
-                                        Services.setToken('0');
-                                        await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AuthScreen()));
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                           ],
                         ),
                       ),
                       // username align right
                       Padding(
                         padding:
-                            const EdgeInsets.only(left: 20, right: 25, top: 10),
+                            const EdgeInsets.only(left: 20, right: 20, top: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -349,7 +265,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             style: TextStyle(
                                               fontFamily: 'iransans',
                                               fontSize: 13,
-                                              // color: Colors.black,
+                                              color: Colors.black,
                                             )),
                                       ),
                                       // Padding(
@@ -402,16 +318,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       ),
                     ]),
-                    floatingActionButton: FloatingActionButton(
-                      backgroundColor: ColorR.text,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PostGameScreen()));
-                      },
-                      child: Icon(Icons.add),
-                    ),
                   ),
                 );
               } else {

@@ -140,10 +140,12 @@ class _SignupScreenState extends State<SignupScreen> {
                             emailController.text);
                         futureUserRegister.then((value) {
                           if (value.token != '0') {
+                            Services.setToken(value.token);
                             futureUserProfile = Services.getUserProfile(
                                 usernameController.text);
                             futureUserProfile.then((value) {
                               if (value.username != null) {
+                                Services.setUserProfileP(value);
                                 Navigator.pushReplacementNamed(context, '/home',
                                     arguments: {
                                       'id': value.id,
@@ -160,7 +162,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 builder: (context) {
                                   return AlertDialog(
                                     title: Text('خطا'),
-                                    content: Text(value.message),
+                                    content: Text('خطا در ساخت حساب کاربری'),
                                     actions: [
                                       FlatButton(
                                         onPressed: () {

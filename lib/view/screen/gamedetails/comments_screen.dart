@@ -31,78 +31,81 @@ class _CommentsScreenState extends State<CommentsScreen> {
           return Directionality(
             textDirection: TextDirection.rtl,
             child: Scaffold(
-                floatingActionButton: FloatingActionButton(onPressed: () {
-                  // show dialog for review game
-                  showDialog(
-                    context: context,
-                    builder: (context) => Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: AlertDialog(
-                        backgroundColor: Colors.white,
-                        alignment: Alignment.center,
-                        // title: Text('نظر دادن به یک بازی'),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            // Text('نام بازی'),
-                            Text(arguments['name'],
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: 'IRANSans',
-                                    fontWeight: FontWeight.bold)),
-                            Text('نظر شما'),
-                            TextFormField(
-                              controller: _commentController,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                              ),
-                            ),
-                            Text('امتیاز شما'),
-                            RatingBar.builder(
-                              initialRating: 0,
-                              minRating: 1,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              itemCount: 5,
-                              itemPadding:
-                                  EdgeInsets.symmetric(horizontal: 4.0),
-                              itemBuilder: (context, _) => Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              ),
-                              onRatingUpdate: (rating) {
-                                rate = rating;
-                                print(rate);
-                              },
-                            ),
-                            RaisedButton(
-                              onPressed: () {
-                                // send review
-                                _futureReview = Services.sendReviewGame(
-                                    arguments['name'],
-                                    // 'dota',
-                                    _commentController.text,
-                                    rate,
-                                    'admin20');
-
-                                _futureReview.then((value) {
-                                  if (value.statusCode == 201) {
-                                    setState(() {
-                                      Navigator.pop(context);
+                floatingActionButton: FloatingActionButton(
+                    child: Icon(Icons.add),
+                    backgroundColor: ColorR.text,
+                    onPressed: () {
+                      // show dialog for review game
+                      showDialog(
+                        context: context,
+                        builder: (context) => Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: AlertDialog(
+                            backgroundColor: Colors.white,
+                            alignment: Alignment.center,
+                            // title: Text('نظر دادن به یک بازی'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                // Text('نام بازی'),
+                                Text(arguments['name'],
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontFamily: 'IRANSans',
+                                        fontWeight: FontWeight.bold)),
+                                Text('نظر شما'),
+                                TextFormField(
+                                  controller: _commentController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                  ),
+                                ),
+                                Text('امتیاز شما'),
+                                RatingBar.builder(
+                                  initialRating: 0,
+                                  minRating: 1,
+                                  direction: Axis.horizontal,
+                                  allowHalfRating: true,
+                                  itemCount: 5,
+                                  itemPadding:
+                                      EdgeInsets.symmetric(horizontal: 4.0),
+                                  itemBuilder: (context, _) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  onRatingUpdate: (rating) {
+                                    rate = rating;
+                                    print(rate);
+                                  },
+                                ),
+                                RaisedButton(
+                                  onPressed: () async {
+                                    // send review
+                                    _futureReview = Services.sendReviewGame(
+                                        arguments['name'],
+                                        // 'dota',
+                                        _commentController.text,
+                                        rate,
+                                        (await Services.getUserProfileP())
+                                            .username);
+                                    _futureReview.then((value) {
+                                      if (value.statusCode == 201) {
+                                        setState(() {
+                                          Navigator.pop(context);
+                                        });
+                                      } else {
+                                        print('error');
+                                      }
                                     });
-                                  } else {
-                                    print('error');
-                                  }
-                                });
-                              },
-                              child: Text('ثبت'),
+                                  },
+                                  child: Text('ثبت'),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  );
-                }),
+                      );
+                    }),
                 body: Padding(
                   padding: const EdgeInsets.only(top: 50, right: 20, left: 20),
                   child: Column(children: [
@@ -119,7 +122,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                     Container(
                       margin: const EdgeInsets.only(top: 20),
                       height: 1,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                     SizedBox(height: 5),
                     Expanded(
@@ -196,7 +199,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
                                         _reviews[index].description,
                                         style: TextStyle(
                                           fontSize: 15,
-                                          color: Colors.white,
+                                          // color: Colors.black,
                                           // iransans
                                           fontFamily: 'iransans',
                                         ),

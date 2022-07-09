@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:rotten_potatoes/utill/colorR.dart';
 import 'package:rotten_potatoes/view/screen/landing/landing_screen.dart';
-import 'package:rotten_potatoes/view/screen/profile/profile_screen.dart';
+import 'package:rotten_potatoes/view/screen/profile/profile2_screen.dart';
 import 'package:rotten_potatoes/view/screen/search/search_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class Home2Screen extends StatefulWidget {
+  const Home2Screen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<Home2Screen> createState() => _Home2ScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _Home2ScreenState extends State<Home2Screen> {
   int _currentIndex = 0;
   // pages
   final _pageOptions = [
-    ProfileScreen(),
+    NoLoginScreen(),
     SearchScreen(),
     LandingScreen(),
   ];

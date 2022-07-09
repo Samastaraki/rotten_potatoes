@@ -1,0 +1,115 @@
+Container(
+                                          padding: EdgeInsets.only(
+                                              left: 100, right: 100),
+                                          // width: double.infinity,
+                                          // alignment: Alignment.center,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              // لایک
+                                              SizedBox(width: 5),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'لایک',
+                                                    style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                      // iransans
+                                                      fontFamily: 'iransans',
+                                                    ),
+                                                  ),
+                                                  SizedBox(width: 5),
+                                                  Icon(
+                                                    Icons.favorite_border,
+                                                    color: Colors.black,
+                                                  ),
+                                                ],
+                                              ),
+                                              // GestureDetector(
+                                              //   onTap: () {
+                                              //     // show dialog to send comment
+                                              //     // showDialog(
+                                              //     //     context: context,
+                                              //     //     builder: (context) {
+                                              //     //       return AlertDialog(
+                                              //     //         title: Center(
+                                              //     //           child: Text(
+                                              //     //               'نظر خود را بنویسید'),
+                                              //     //         ),
+                                              //     //         content:
+                                              //     //             TextFormField(
+                                              //     //           controller:
+                                              //     //               _commentController,
+                                              //     //           decoration:
+                                              //     //               InputDecoration(
+                                              //     //             border:
+                                              //     //                 OutlineInputBorder(),
+                                              //     //           ),
+                                              //     //         ),
+                                              //     //         actions: [
+                                              //     //           Center(
+                                              //     //             child:
+                                              //     //                 RaisedButton(
+                                              //     //               onPressed: () {
+                                              //     //                 // send comment
+                                              //     //                 _futureComment = Services.sendCommentGame(
+                                              //     //                     _posts[index]
+                                              //     //                             .data[
+                                              //     //                         'id'],
+                                              //     //                     _commentController
+                                              //     //                         .text);
+                                              //     //                 _futureComment
+                                              //     //                     .then(
+                                              //     //                         (value) {
+                                              //     //                   if (value
+                                              //     //                           .statusCode ==
+                                              //     //                       201) {
+                                              //     //                     setState(
+                                              //     //                         () {
+                                              //     //                       _commentController
+                                              //     //                           .clear();
+                                              //     //                       Navigator.pop(
+                                              //     //                           context);
+                                              //     //                     });
+                                              //     //                   } else {
+                                              //     //                     print(
+                                              //     //                         'error');
+                                              //     //                   }
+                                              //     //                 });
+                                              //     //               },
+                                              //     //               child:
+                                              //     //                   Text('ثبت'),
+                                              //     //             ),
+                                              //     //           ),
+                                              //     //         ],
+                                              //     //       );
+                                              //     //     });
+                                              //     // setState(() {
+                                              //     //   _isPostonC[index] = true;
+                                              //     // });
+                                              //   },
+                                              //   child: Row(
+                                              //     children: [
+                                              //       Text(
+                                              //         'نظر',
+                                              //         style: TextStyle(
+                                              //           fontSize: 15,
+                                              //           color: Colors.black,
+                                              //           // iransans
+                                              //           fontFamily: 'iransans',
+                                              //         ),
+                                              //       ),
+                                              //       // 5 box
+                                              //       SizedBox(width: 5),
+                                              //       Icon(
+                                              //         Icons.comment,
+                                              //         color: Colors.black,
+                                              //       ),
+                                              //     ],
+                                              //   ),
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
